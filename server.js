@@ -1,29 +1,36 @@
 // DEPENDENCIES
-const express = require("express");
+const express = require('express');
 const app = express();
-const { Sequelize } = require("sequelize");
+const { Sequelize, Model, DataTypes } = require('sequelize');
+const dotenv = require('dotenv').config();
+const PORT = process.env.PORT;
+const PG_URI = process.env.PG_URI;
 
 // CONFIGURATION / MIDDLEWARE
-require("dotenv").config();
-const PORT = process.env.PORT;
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // SEQUELIZE CONNECTION
-const sequelize = new Sequelize(process.env.PG_URI);
+const sequelize = new Sequelize(PG_URI);
 try {
   sequelize.authenticate();
-  console.log("Connection to postgres established successfully.");
+  console.log('Connected to postgres');
 } catch (err) {
-  console.log("Unable to connect to the database:", err);
+  console.log('Unable to connect to the database:', err);
 }
 
 // ROOT
-app.get("/", (req, res) => {
-  res.status(200).json({
-    message: "Welcome to the Tour API",
-  });
+app.get('/', (req, res) => {
+  try {
+    res.status(200).json({
+      message: 'Welcome to the Tour API',
+    });
+  } catch (err) {
+    // 404 Page
+    app.get('*', (req, res) => {
+      res.send('404');
+    });
+  }
 });
 
 // LISTEN
