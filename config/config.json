@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "nando",
+    "username": "root",
     "password": "IEblack30!",
     "database": "music_tour",
     "port": "8081",
