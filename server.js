@@ -11,21 +11,6 @@ const PG_PW = process.env.PG_PW;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// SEQUELIZE CONNECTION
-const sequelize = new Sequelize({
-  storage: PG_URI,
-  dialect: 'postgres',
-  username: 'postgres',
-  password: PG_PW,
-});
-
-try {
-  sequelize.authenticate();
-  console.log('Connected to postgres');
-} catch (err) {
-  console.log('Unable to connect to the database:', err);
-}
-
 // ROOT
 app.get('/', (req, res) => {
   try {
