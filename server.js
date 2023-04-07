@@ -1,17 +1,24 @@
 // DEPENDENCIES
 const express = require('express');
 const app = express();
-const { Sequelize, Model, DataTypes } = require('sequelize');
+const { Sequelize } = require('sequelize');
 const dotenv = require('dotenv').config();
 const PORT = process.env.PORT;
 const PG_URI = process.env.PG_URI;
+const PG_PW = process.env.PG_PW;
 
 // CONFIGURATION / MIDDLEWARE
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // SEQUELIZE CONNECTION
-const sequelize = new Sequelize(PG_URI);
+const sequelize = new Sequelize({
+  storage: PG_URI,
+  dialect: 'postgres',
+  username: 'postgres',
+  password: PG_PW,
+});
+
 try {
   sequelize.authenticate();
   console.log('Connected to postgres');
