@@ -3,7 +3,7 @@ const bands = require('express').Router();
 const db = require('../models');
 const { Band } = db;
 
-// GET (INDEX/FINDALL)
+// INDEX (GET findAll)
 bands.get('/', async (req, res) => {
   try {
     // this finds all bands
@@ -17,7 +17,7 @@ bands.get('/', async (req, res) => {
   }
 });
 
-// SHOW (ID/FINDONE)
+// SHOW (GET findOne)
 bands.get('/:id', async (req, res) => {
   try {
     // this finds a single band by it's id
@@ -35,7 +35,7 @@ bands.get('/:id', async (req, res) => {
   }
 });
 
-// CREATE (POST/CREATE)
+// CREATE (POST)
 bands.post('/', async (req, res) => {
   try {
     // this creates a new band
@@ -52,7 +52,7 @@ bands.post('/', async (req, res) => {
   }
 });
 
-// UPDATE (PUT/UPDATE)
+// UPDATE (PUT)
 bands.put('/:id', async (req, res) => {
   try {
     // this updates a band
