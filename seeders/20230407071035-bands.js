@@ -21,6 +21,18 @@ module.exports = {
         available_start_time: '2023-04-07 11:00:00',
         end_time: '2023-04-07 23:00:00',
       },
+      {
+        name: 'The Beatles',
+        genre: 'Rock',
+        available_start_time: '2023-04-07 11:00:00',
+        end_time: '2023-04-07 23:00:00',
+      },
+      {
+        name: 'The Rolling Stones',
+        genre: 'Rock',
+        available_start_time: '2023-04-07 11:00:00',
+        end_time: '2023-04-07 23:00:00',
+      },
     ]);
   },
 
@@ -29,3 +41,5 @@ module.exports = {
     await queryInterface.bulkDelete('bands', null, {});
   },
 };
+
+// Added the beatles and rolling stones to the bands table
