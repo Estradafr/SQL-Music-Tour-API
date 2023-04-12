@@ -2,12 +2,20 @@
 const bands = require('express').Router();
 const db = require('../models');
 const { Band } = db;
+const { Op } = require('sequelize');
 
 // INDEX (GET findAll)
 bands.get('/', async (req, res) => {
   try {
     // this finds all bands
-    const foundBands = await Band.findAll();
+    const foundBands = await Band.findAll({
+      order: [['band_id', 'DESC']],
+      where: {
+        name: {
+          [Op.like]: `%${req.query.name ? req.query.name : ''}%`,
+        },
+      },
+    });
     res.status(200).json(foundBands);
   } catch (error) {
     console.log(error);
