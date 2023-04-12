@@ -19,7 +19,7 @@ bands.get('/', async (req, res) => {
 // SHOW (ID/FINDONE)
 bands.get('/:id', async (req, res) => {
   try {
-    // this finds a band by it's id where the id is equal to the req.params.id parameter
+    // this finds a single band by it's id and returns it with it's corresponding id, { example: '/bands/2' }
     const foundBand = await Band.findOne({
       where: {
         band_id: req.params.id,
