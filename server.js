@@ -29,6 +29,9 @@ app.get('/', (req, res) => {
 const bandsController = require('./controllers/bands_controller');
 app.use('/bands', bandsController);
 
+const eventController = require('./controllers/event_controller');
+app.use('/events', eventController);
+
 // LISTEN
 app.listen(PORT, () => {
   console.log(`FRAKENSTEIN, IT'S ALIVE ON PORT: ${PORT}!`);
