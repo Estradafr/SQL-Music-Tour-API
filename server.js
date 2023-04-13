@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 app.get('/', (req, res) => {
   try {
     res.status(200).json({
-      message: 'Welcome to the Tour API',
+      message: 'Welcome to the server!',
     });
   } catch (err) {
     // 404 Page
