@@ -8,7 +8,14 @@ const { Op } = require('sequelize');
 event.get('/', async (req, res) => {
   try {
     // this finds all events
-    const foundEvents = await Event.findAll();
+    const foundEvents = await Event.findAll({
+      order: [['event_id', 'ASC']],
+      where: {
+        name: {
+          [Op.like]: `%${req.query.name ? req.query.name : ''}%`,
+        },
+      },
+    });
     res.status(200).json(foundEvents);
   } catch (error) {
     console.log(error);
@@ -70,7 +77,7 @@ event.put('/:id', async (req, res) => {
         event_id: req.params.id,
       },
     });
-    res.status(200).json({
+    res.status(202).json({
       message: `Successfully updated ${updatedEvent} event(s)`,
     });
   } catch (error) {

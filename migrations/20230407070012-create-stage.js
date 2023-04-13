@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
       },
-      stage_name: {
+      name: {
         type: Sequelize.STRING,
         allowNull: false,
       },

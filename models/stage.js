@@ -18,11 +18,13 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      stage_name: DataTypes.STRING,
+      name: DataTypes.STRING,
     },
     {
       sequelize,
       modelName: 'Stage',
+      tableName: 'stages',
+      timestamps: false,
     }
   );
   return Stage;
