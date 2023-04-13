@@ -15,6 +15,7 @@ bands.get('/', async (req, res) => {
           [Op.like]: `%${req.query.name ? req.query.name : ''}%`,
         },
       },
+      limit: 10,
     });
     res.status(200).json(foundBands);
   } catch (error) {
