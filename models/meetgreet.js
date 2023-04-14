@@ -22,7 +22,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   MeetGreet.init(
     {
-      meet_greet_id: DataTypes.INTEGER,
+      meet_greet_id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       event_id: DataTypes.SMALLINT,
       band_id: DataTypes.SMALLINT,
       meet_start_time: DataTypes.DATE,
@@ -31,6 +35,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'MeetGreet',
+      tableName: 'meet_greets',
+      timestamps: false,
     }
   );
   return MeetGreet;

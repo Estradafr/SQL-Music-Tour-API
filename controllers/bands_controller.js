@@ -1,7 +1,7 @@
 // DEPENDENCIES
 const bands = require('express').Router();
 const db = require('../models');
-const { Band } = db;
+const { Band, MeetGreet, Event, SetTime } = db;
 const { Op } = require('sequelize');
 
 // INDEX (GET findAll)
@@ -27,13 +27,48 @@ bands.get('/', async (req, res) => {
 });
 
 // SHOW (GET findOne)
-bands.get('/:id', async (req, res) => {
+bands.get('/:name', async (req, res) => {
+  /* 
+    '/:id' => '/bands/:id'
+    where: {
+      id: req.params.id
+    }
+  */
   try {
-    // this finds a single band by it's id
+    // this finds a single band by it's name
     const foundBand = await Band.findOne({
       where: {
-        band_id: req.params.id,
+        name: req.params.name,
+        // name: req.params.id
       },
+      include: [
+        {
+          model: MeetGreet,
+          as: 'meet_greets',
+          include: {
+            model: Event,
+            as: 'event',
+            where: {
+              name: {
+                [Op.like]: `%${req.query.event ? req.query.event : ''}%`,
+              },
+            },
+          },
+        },
+        {
+          model: SetTime,
+          as: 'set_times',
+          include: {
+            model: Event,
+            as: 'event',
+            where: {
+              name: {
+                [Op.like]: `%${req.query.event ? req.query.event : ''}%`,
+              },
+            },
+          },
+        },
+      ],
     });
     res.status(200).json(foundBand);
   } catch (error) {

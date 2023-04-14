@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         as: 'event',
       });
 
-      SetTime.hasMany(Stage, {
+      SetTime.belongsTo(Stage, {
         foreignKey: 'stage_id',
         as: 'stage',
       });
@@ -27,7 +27,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   SetTime.init(
     {
-      set_time_id: DataTypes.INTEGER,
+      set_time_id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       event_id: DataTypes.SMALLINT,
       stage_id: DataTypes.SMALLINT,
       band_id: DataTypes.SMALLINT,
@@ -37,6 +41,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'SetTime',
+      tableName: 'set_times',
+      timestamps: false,
     }
   );
   return SetTime;

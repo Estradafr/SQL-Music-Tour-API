@@ -4,34 +4,10 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('bands', [
       {
-        name: 'Artic Monkeys',
-        genre: 'Indie Rock',
-        available_start_time: '2023-04-07 11:00:00',
-        end_time: '2023-04-07 23:00:00',
-      },
-      {
-        name: 'Paramore',
-        genre: 'Pop Rock',
-        available_start_time: '2023-04-07 11:00:00',
-        end_time: '2023-04-07 23:00:00',
-      },
-      {
-        name: 'Three Days Grace',
-        genre: 'Alternative Hard Rock',
-        available_start_time: '2023-04-07 11:00:00',
-        end_time: '2023-04-07 23:00:00',
-      },
-      {
-        name: 'The Beatles',
+        name: "Guns N' Roses",
         genre: 'Rock',
-        available_start_time: '2023-04-07 11:00:00',
-        end_time: '2023-04-07 23:00:00',
-      },
-      {
-        name: 'The Rolling Stones',
-        genre: 'Rock',
-        available_start_time: '2023-04-07 11:00:00',
-        end_time: '2023-04-07 23:00:00',
+        available_start_time: '2023-06-20 14:00:00-07',
+        end_time: '2023-06-22 16:00:00-07',
       },
     ]);
   },
@@ -41,5 +17,3 @@ module.exports = {
     await queryInterface.bulkDelete('bands', null, {});
   },
 };
-
-// Added the beatles and rolling stones to the bands table

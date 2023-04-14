@@ -1,7 +1,7 @@
 // DEPENDENCIES
 const stages = require('express').Router();
 const db = require('../models');
-const { Stage } = db;
+const { Stage, Event, StageEvent } = db;
 const { Op } = require('sequelize');
 
 // INDEX (GET findAll)
@@ -27,16 +27,20 @@ stages.get('/', async (req, res) => {
 });
 
 // SHOW (GET findOne)
-stages.get('/:id', async (req, res) => {
+stages.get('/:name', async (req, res) => {
   try {
-    // this finds a stage by it's ID
-    const foundStage = await Stage.findOne();
+    const foundStage = await Stage.findOne({
+      where: { name: req.params.name },
+      include: {
+        model: Event,
+        as: 'events',
+        through: { attributes: [] },
+      },
+    });
     res.status(200).json(foundStage);
   } catch (error) {
     console.log(error);
-    res.status(500).json({
-      message: 'Sever Error',
-    });
+    res.status(500).json(error);
   }
 });
 
