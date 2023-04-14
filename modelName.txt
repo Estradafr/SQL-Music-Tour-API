@@ -82,3 +82,9 @@ FILTERING DATA {
 
     // IN SQL
 }
+
+
+
+Associations relationships
+
+one-to-one, one-to-many, many-to-many
